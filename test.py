@@ -5,7 +5,6 @@ from subscribe import subscribe
 import aiopg
 from config import config_string
 
-# dsn = "dbname=bimbo user=pygreen password=icugr8xx14 host=localhost"
 data_source_name = config_string
 async def main():
     async with aiopg.connect(data_source_name) as listenConn:
