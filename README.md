@@ -1,2 +1,2 @@
-# Greenstand
-Greenstand Tree Tracker Queueing Library
+# PG Green
+Python Notification Library for Postgresql 
