@@ -2,6 +2,5 @@
 
 Python Notification Library for Postgresql
 
-To test you must include database config in config.py
-I am yet to add way to avoid hardcoding the db creds.
+To test you must include data provide a Data Source Name (DSN) for a db connection pool
 
