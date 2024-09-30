@@ -1,27 +1,30 @@
-async def publish(pool, channel: str, messages: list):
+import aiopg
+
+async def publish(dsn, channel: str, data: str):
     """
-    Send a list of notifications to a PostgreSQL channel.
+    Publish a message to the PostgreSQL queue by inserting data into the table.
 
     Args:
-        pool (aiopg.Pool): The aiopg connection pool.
-        channel (str): The PostgreSQL channel to send notifications to.
-        messages (list): A list of messages to send.
+        dsn (str): The PostgreSQL database connection string.
+        channel (str): The channel where the message is to be dispatched.
+        data (str): The data to be inserted into the queue.
     """
-    
-    # Acquire a connection from the aiopg connection pool
-    async with pool.acquire() as conn:
+    # SQL query to insert data into the queue.message table
+    query = "INSERT INTO queue.message(channel, data) VALUES (%s, %s) RETURNING *"
+    values = (channel, data)
+
+    async with aiopg.connect(dsn) as conn:
         async with conn.cursor() as cur:
             try:
-                for msg in messages:
-                    print(f"Send -> {msg}")
-                    # Execute the NOTIFY command on the PostgreSQL channel with the current message.
-                    # This command asynchronously sends a notification to the channel.
-                    await cur.execute(f"NOTIFY {channel}, %s", (msg,))
-            
+                # Execute the SQL query with the provided values
+                await cur.execute(query, values)
+                
+                # Fetch and print the result from the database
+                result = await cur.fetchone()
+                print(f"Postgres message dispatch success: {result}")
             except Exception as error:
-                print(f"Error Occurred -> {error}")
-                print("Shutting down publisher")
-            
+                    print(f"Error Occurred -> {error}")
+                
             finally:
                 # This is often useful to let listeners know that no more messages will be sent.
                 await cur.execute(f"NOTIFY {channel}, 'finish'")

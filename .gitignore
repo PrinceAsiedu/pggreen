@@ -1,0 +1,79 @@
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment variables and virtual environments
+.env
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Pytest cache
+.pytest_cache/
+.tox/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# SQLite database files (if used in tests or locally)
+*.sqlite3
+
+# Logs
+*.log
+*.out
+*.err
+
+# PostgreSQL database dump files
+*.sql
+*.dump
+
+# Secrets
+secret_key.txt
+
+# MacOS
+.DS_Store
+
+# IDE-specific settings
+.vscode/
+.idea/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+
+# Test reports
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+*.pot
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# PyInstaller
+*.spec
+
+# Mypy cache
+.mypy_cache/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.bak
+*.orig
+
+*.sql

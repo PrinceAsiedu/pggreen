@@ -1,4 +1,5 @@
 import psycopg2
+
 async def subscribe(conn, channel: str):
     """
     Listen for notifications on a PostgreSQL channel.
